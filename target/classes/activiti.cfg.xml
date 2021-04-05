@@ -3,6 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--
+        activiti.cfg.xml
+            包括：ProcessEngineConfiguration 的定义、数据源定义、事务管理器等，此文件其实就是一个 spring 配置文件。
+
+            通过 ProcessEngineConfiguration 可以创建工作流引擎 ProceccEngine，常用的两种方法如下：
+                通过 org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration
+                Activiti 可以单独运行，使用它创建的 ProcessEngine，Activiti 会自己处理事务。
+    -->
+
     <!--数据源配置dbcp-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
@@ -13,8 +22,11 @@
     </bean>
 
     <!--
-        activiti单独运行的ProcessEngine配置对象(processEngineConfiguration),使用单独启动方式
-        默认情况下：bean的id=processEngineConfiguration
+        通过 ProcessEngineConfiguration 可以创建工作流引擎 ProceccEngine，常用的两种方法如下：
+                其一单独配置 activiti.xml文件：通过 org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration
+                Activiti 可以单独运行，使用它创建的 ProcessEngine，Activiti 会自己处理事务。
+        activiti 单独运行的 ProcessEngine 配置对象 (processEngineConfiguration),使用单独启动方式。
+        默认情况下：bean 的 id=processEngineConfiguration
     -->
     <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
         <!--代表数据源-->
